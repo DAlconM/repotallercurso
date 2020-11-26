@@ -12,7 +12,7 @@ Puertos de conexión servicios auxiliares
 Eureka-> user: usuario | password: usuario
 
 Puertos de conexión microservicios
-- cliente-service
+- cliente-service: 8090
 - factura-service
 - pago-service
 - visita-service
