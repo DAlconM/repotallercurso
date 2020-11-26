@@ -1,0 +1,7 @@
+CREATE DATABASE IF NOT EXISTS practicams;
+
+ALTER DATABASE practicams
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+USE practicams;

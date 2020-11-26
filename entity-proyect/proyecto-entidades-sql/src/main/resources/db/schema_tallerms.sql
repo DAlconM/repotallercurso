@@ -1,7 +1,0 @@
-CREATE DATABASE IF NOT EXISTS tallerms;
-
-ALTER DATABASE tallerms
-  DEFAULT CHARACTER SET utf8
-  DEFAULT COLLATE utf8_general_ci;
-
-USE tallerms;
