@@ -9,6 +9,7 @@ Puertos de conexión servicios auxiliares
 - admin-server: 8081
 - server-config: 8888
 - hystrix-server: 8082
+- turbine-server: 8083
 
 Eureka-> user: usuario | password: usuario
 
@@ -17,3 +18,8 @@ Puertos de conexión microservicios
 - factura-service: 8091
 - pago-service: 8092
 - visita-service: 8093
+
+Proyectos de entidades del dominio
+- proyecto-entidades-dto (Data Transfer Object)
+- proyecto-entidades-mongo
+- proyecto-entidades-sql
