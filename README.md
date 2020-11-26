@@ -8,6 +8,7 @@ Puertos de conexión servicios auxiliares
 - cloud-server: 8080
 - admin-server: 8081
 - server-config: 8888
+- hystrix-server: 8082
 
 Eureka-> user: usuario | password: usuario
 
