@@ -14,6 +14,6 @@ Eureka-> user: usuario | password: usuario
 
 Puertos de conexión microservicios
 - cliente-service: 8090
-- factura-service
-- pago-service
-- visita-service
+- factura-service: 8091
+- pago-service: 8092
+- visita-service: 8093
