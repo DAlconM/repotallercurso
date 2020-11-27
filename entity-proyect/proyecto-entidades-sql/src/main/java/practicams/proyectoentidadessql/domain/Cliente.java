@@ -1,7 +1,10 @@
 package practicams.proyectoentidadessql.domain;
 
 
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 @Table(name = "clientes")
