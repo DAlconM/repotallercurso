@@ -19,12 +19,8 @@ public class Direccion {
     @Column(name = "domicilio")
     private String domicilio;
 
-    @Column(name = "estado")
-    private String estado;
-
     @Column(name = "cliente")
     private int cliente;
-
 
     public int getId() {
         return id;
@@ -66,11 +62,4 @@ public class Direccion {
         this.cliente = cliente;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 }

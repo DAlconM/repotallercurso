@@ -17,8 +17,18 @@ public class ClienteService {
     DireccionService direccionService;
 
     // Devolver todos los clientes
-    public List<Cliente> getAllClients() {
+    public List<Cliente> getAllClients(){
         return clienteRepository.findAll();
     }
+
+    // Devolver un cliente por el id
+    public Cliente getClienteById(Integer id){
+        return clienteRepository.findById(id);
+    }
+
+    public List<Cliente> getClientesByNombre(String nombre){
+        return clienteRepository.findAllByNombre(nombre);
+    }
+
 
 }

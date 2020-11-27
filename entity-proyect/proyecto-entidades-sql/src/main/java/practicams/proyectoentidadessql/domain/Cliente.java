@@ -50,4 +50,5 @@ public class Cliente {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
 }
