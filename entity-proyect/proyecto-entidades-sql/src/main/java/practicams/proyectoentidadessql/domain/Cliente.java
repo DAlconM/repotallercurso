@@ -1,10 +1,6 @@
 package practicams.proyectoentidadessql.domain;
 
-
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
-import javax.persistence.Entity;
 
 @Entity
 @Table(name = "clientes")
@@ -12,7 +8,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name= "nombre")
     private String nombre;
@@ -23,11 +19,11 @@ public class Cliente {
     @Column(name= "estado")
     private String estado;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

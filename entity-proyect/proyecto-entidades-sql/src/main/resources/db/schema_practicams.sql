@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS clientes (
   nombre VARCHAR(50),
   apellido VARCHAR(50),
   estado VARCHAR(20),
-  INDEX(apellido)
+  INDEX(id)
 ) engine=InnoDB;
 
 CREATE TABLE IF NOT EXISTS direcciones (
