@@ -24,4 +24,9 @@ public class DireccionService {
         return direccionRepository.findById(id);
     }
 
+    // Obtener las direcciones por provincia
+    public List<Direccion> getAllDireccionByProvincia(String provincia){
+        return direccionRepository.findAllByProvincia(provincia);
+    }
+
 }

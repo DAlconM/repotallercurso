@@ -1,4 +1,7 @@
 package practicams.facturaservice.repositories;
 
-public interface FacturaRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+import practicams.proyectoentidadesmongo.domain.Factura;
+
+public interface FacturaRepository extends MongoRepository<Factura, String> {
 }

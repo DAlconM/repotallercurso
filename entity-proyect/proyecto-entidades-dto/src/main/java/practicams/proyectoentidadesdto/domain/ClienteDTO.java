@@ -3,7 +3,7 @@ package practicams.proyectoentidadesdto.domain;
 // Pojo Cliente Data Transfer Object
 public class ClienteDTO {
 
-    private int id;
+    private Integer id;
 
     private String nombre;
 
@@ -11,11 +11,11 @@ public class ClienteDTO {
 
     private String estado;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

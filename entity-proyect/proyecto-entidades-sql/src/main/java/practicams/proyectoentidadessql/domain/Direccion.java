@@ -20,13 +20,13 @@ public class Direccion {
     private String domicilio;
 
     @Column(name = "cliente")
-    private int cliente;
+    private Integer cliente;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

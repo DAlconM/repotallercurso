@@ -3,7 +3,7 @@ package practicams.proyectoentidadesdto.domain;
 // Pojo Direccion Data Transfer Object
 public class DireccionDTO {
 
-    private int id;
+    private Integer id;
 
     private String provincia;
 
@@ -11,15 +11,13 @@ public class DireccionDTO {
 
     private String domicilio;
 
-    private String estado;
+    private Integer cliente;
 
-    private int cliente;
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -47,19 +45,11 @@ public class DireccionDTO {
         this.domicilio = domicilio;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public int getCliente() {
+    public Integer getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(Integer cliente) {
         this.cliente = cliente;
     }
 }

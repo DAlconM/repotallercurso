@@ -3,21 +3,21 @@ package practicams.proyectoentidadesdto.domain;
 // Pojo Visita Data Transfer Object
 public class VisitaDTO {
 
-    private int id;
+    private Integer id;
 
     private String estado;
 
-    private int cliente;
+    private Integer cliente;
 
     private double importe;
 
     private String factura;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,11 +29,11 @@ public class VisitaDTO {
         this.estado = estado;
     }
 
-    public int getCliente() {
+    public Integer getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(Integer cliente) {
         this.cliente = cliente;
     }
 

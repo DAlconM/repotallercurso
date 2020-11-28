@@ -14,4 +14,6 @@ public interface DireccionRepository extends Repository<Direccion, Integer> {
     List<Direccion> findAllByCliente(Integer id);
 
     Direccion findByCliente(Integer id);
+
+    List<Direccion> findAllByProvincia(String provincia);
 }

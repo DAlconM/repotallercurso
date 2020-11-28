@@ -8,13 +8,13 @@ public class Visita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name= "estado")
     private String estado;
 
     @Column(name= "cliente")
-    private int cliente;
+    private Integer cliente;
 
     @Column(name= "importe")
     private double importe;
@@ -22,11 +22,11 @@ public class Visita {
     @Column(name= "factura")
     private String factura;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -38,11 +38,11 @@ public class Visita {
         this.estado = estado;
     }
 
-    public int getCliente() {
+    public Integer getCliente() {
         return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(Integer cliente) {
         this.cliente = cliente;
     }
 
