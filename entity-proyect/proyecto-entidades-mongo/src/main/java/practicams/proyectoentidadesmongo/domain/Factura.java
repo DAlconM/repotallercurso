@@ -12,6 +12,8 @@ public class Factura {
 
     private String estado;
 
+    private Integer cliente;
+
     private double importetotal;
 
     private Integer formapago;
@@ -32,6 +34,14 @@ public class Factura {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Integer getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Integer cliente) {
+        this.cliente = cliente;
     }
 
     public double getImportetotal() {

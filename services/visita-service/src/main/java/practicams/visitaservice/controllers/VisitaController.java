@@ -77,6 +77,10 @@ public class VisitaController {
         return visitaService.modifyVisita(visita);
     }
 
+    /*
+        Métodos práctica para llamadas entre microservicios
+     */
+
 
     /*
         Métodos extra
