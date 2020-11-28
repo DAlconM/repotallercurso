@@ -2,8 +2,11 @@ package practicams.facturaservice.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import practicams.facturaservice.services.FacturaService;
+import practicams.proyectoentidadesdto.domain.FacturaDTO;
+import practicams.proyectoentidadesdto.domain.VisitaDTO;
 import practicams.proyectoentidadesmongo.domain.Factura;
 import practicams.proyectoentidadesmongo.domain.LineaFactura;
 
@@ -91,6 +94,36 @@ public class FacturaController {
         Métodos práctica para llamadas entre microservicios
      */
 
+    //
+    // Método remoto que devuelve las facturas por id de cliente
+    //
+    @GetMapping("/callfactura/byclientid/{id}")
+    public List<FacturaDTO> callGetFacturasByCliente(@PathVariable("id") Integer clienteid){
+        List<Factura> facturas =  facturaService.getFacturasByClienteId(clienteid);
+
+        // Mapeamos las facturas a dto para su transferencia
+        List<FacturaDTO> resultado = mapFacturaToFacturaDTO(facturas);
+
+        // Devolvemos la lista de facturas dto
+        return resultado;
+
+    }
+
+    //
+    // Método remoto que devuelve las facturas por estado de la factura
+    //
+    @GetMapping("/callfactura/byfacturaestado/{estado}")
+    public List<FacturaDTO> callGetFacturasByEstado(@PathVariable("estado") String estado){
+        List<Factura> facturas =  facturaService.getFacturasByEstado(estado);
+
+        // Mapeamos las facturas a dto para su transferencia
+        List<FacturaDTO> resultado = mapFacturaToFacturaDTO(facturas);
+
+        // Devolvemos la lista de facturas dto
+        return resultado;
+
+    }
+
 
     /*
         Métodos extra
@@ -118,6 +151,41 @@ public class FacturaController {
     @PostMapping("/facturas/insertempty")
     public Factura insertEmptyFactura(@RequestBody Factura factura){
         return facturaService.insertEmptyFactura(factura);
+    }
+
+    // Método que mapea una lista de facturas a facturas dto
+    private List<FacturaDTO> mapFacturaToFacturaDTO(List<Factura> facturas){
+        List<FacturaDTO> resultado = new ArrayList<>();
+
+        // Mapeamos las facturas obtenidas a facturas dto
+        for(Factura f : facturas){
+            FacturaDTO fdto = new FacturaDTO();
+            fdto.setId(f.getId());
+            fdto.setEstado(f.getEstado());
+            fdto.setCliente(f.getCliente());
+            fdto.setImportetotal(f.getImportetotal());
+            fdto.setFormapago(f.getFormapago());
+
+            // Mapeamos las lineas de factura de la factura a visitas DTO
+            List<VisitaDTO> visitasDTO = new ArrayList<>();
+            for(LineaFactura lf : f.getLineasfactura()){
+                VisitaDTO vdto = new VisitaDTO();
+                vdto.setId(lf.getId());
+                vdto.setEstado(lf.getEstado());
+                vdto.setCliente(lf.getCliente());
+                vdto.setImporte(lf.getImporte());
+                vdto.setFactura(lf.getFactura());
+
+                visitasDTO.add(vdto);
+            }
+            // Seteamos la lista de lineas de factura DTO
+            fdto.setLineasfactura(visitasDTO);
+
+            // Añadimos la FacturaDTO a la lista de DTOs
+            resultado.add(fdto);
+        }
+
+        return resultado;
     }
 
 }

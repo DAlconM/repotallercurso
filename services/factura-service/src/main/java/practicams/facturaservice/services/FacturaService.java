@@ -55,4 +55,5 @@ public class FacturaService {
     public List<Factura> getFacturasByImportetotal(double importe) {
         return facturaRepository.findAllByImportetotal(importe);
     }
+
 }
