@@ -1,5 +1,5 @@
-INSERT IGNORE INTO clientes VALUES (1, 'Daniel', 'Alcon', 'Factura pendiente pago');
-INSERT IGNORE INTO clientes VALUES (2, 'Mario', 'Martin', 'Factura pendiente pago');
+INSERT IGNORE INTO clientes VALUES (1, 'Daniel', 'Alcon', 'Sin facturas Pendientes');
+INSERT IGNORE INTO clientes VALUES (2, 'Mario', 'Martin', 'Sin facturas Pendientes');
 INSERT IGNORE INTO clientes VALUES (3, 'Daniel', 'Radcliffe', 'Sin facturas Pendientes');
 INSERT IGNORE INTO clientes VALUES (4, 'Luis', 'Alejo', 'Sin facturas Pendientes');
 

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import practicams.pagoservice.services.PagoService;
+import practicams.proyectoentidadesdto.domain.PagoDTO;
 import practicams.proyectoentidadesmongo.domain.Factura;
 import practicams.proyectoentidadesmongo.domain.Pago;
 
@@ -119,7 +120,15 @@ public class PagoController {
     /*
         Métodos práctica para llamadas entre microservicios
      */
+    @HystrixCommand
+    @GetMapping("/callpago/getpagosbyfactura/{id}")
+    public List<PagoDTO> callGetPagosByFactura(@PathVariable("id") String facturaid){
+        List<Pago> pagos = pagoService.getPagosByFactura(facturaid);
 
+        List<PagoDTO> resultado = mapPagoToPagoDTO(pagos);
+
+        return resultado;
+    }
 
 
     /*
@@ -152,6 +161,23 @@ public class PagoController {
     @PostMapping("/pagos/insertempty")
     public Pago insertEmptyPago(@RequestBody Pago pago){
         return pagoService.insertEmptyPago(pago);
+    }
+
+    // Método que mapea una lista de pagos a pagos dto
+    private List<PagoDTO> mapPagoToPagoDTO(List<Pago> pagos){
+        List<PagoDTO> resultado = new ArrayList<>();
+
+        for(Pago p : pagos){
+            PagoDTO pagoDTO = new PagoDTO();
+            pagoDTO.setId(p.getId());
+            pagoDTO.setFactura(p.getFactura());
+            pagoDTO.setImporte(p.getImporte());
+            pagoDTO.setEstado(p.getEstado());
+
+            resultado.add(pagoDTO);
+        }
+
+        return resultado;
     }
 
 }

@@ -3,8 +3,10 @@ package practicams.facturaservice.controllers;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import practicams.facturaservice.services.FacturaService;
 import practicams.proyectoentidadesdto.domain.FacturaDTO;
 import practicams.proyectoentidadesdto.domain.VisitaDTO;
@@ -19,6 +21,13 @@ public class FacturaController {
 
     @Autowired
     FacturaService facturaService;
+
+    // Balanceador de carga para las llamadas entre microservicios
+    @LoadBalanced
+    @Bean
+    RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
 
     /*
         Métodos práctica en microservicio

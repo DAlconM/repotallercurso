@@ -1,8 +1,13 @@
 package practicams.clienteservice.services;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import practicams.clienteservice.repositories.ClienteRepository;
+import practicams.proyectoentidadesdto.domain.FacturaDTO;
 import practicams.proyectoentidadessql.domain.Cliente;
 import practicams.proyectoentidadessql.domain.Direccion;
 
@@ -17,6 +22,9 @@ public class ClienteService {
 
     @Autowired
     DireccionService direccionService;
+
+    @Autowired
+    RestTemplate balancedCall;
 
     // Devolver todos los clientes
     public List<Cliente> getAllClientes(){
@@ -55,4 +63,61 @@ public class ClienteService {
     public List<Cliente> getClientesByEstado(String estado){
         return clienteRepository.findAllByEstado(estado);
     }
+
+    //
+    // Métodos Schedule de ejecución periódica
+    //
+
+    // Método que se encarga de comprobar el estado de los clientes cada 10 segundos
+    @Scheduled(initialDelay = 10000, fixedDelay = 10000)
+    @HystrixCommand(fallbackMethod = "facturaServiceDown")
+    public void checkClienteEstado(){
+
+        // Sacamos los clientes
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        // Recorremos la lista de clientes y vamos pidiendo sus facturas para ver los estados de estas
+        for(Cliente cliente : clientes){
+            // Pedimos al servicio de facturas las facturas con el id del cliente
+            // Llamada con Balancer
+            ResponseEntity<FacturaDTO[]> response = balancedCall.getForEntity("http://factura-service/callfactura/byclientid/" + cliente.getId(), FacturaDTO[].class);
+
+            FacturaDTO[] facturas = response.getBody();
+
+            //System.out.println("Cliente: " + cliente.getId());
+
+            if(facturas != null && facturas.length != 0){
+
+                Boolean pendientes = false;
+
+                // Recorremos las facturas comprobando los estados
+                for(FacturaDTO factura : facturas){
+
+                    //System.out.println("\tFactura: " + factura.getId() + " || Estado: " + factura.getEstado());
+
+                    // Si el estado de la factura es pendiente de pago o pagada parcialmente establecemos activamos el flag
+                    if(factura.getEstado().equals("Pendiente pago") || factura.getEstado().equals("Pagada parcialmente")){
+                        //System.out.println("GUARDAR CLIENTE ESTADO CAMBIADO EN BD");
+                        pendientes = true;
+                    }
+                }
+
+                // Si tenia alguna pendiente modificamos
+                if(pendientes){
+                    cliente.setEstado("Factura pendiente pago");
+                    clienteRepository.save(cliente);
+                }
+                else{
+                    cliente.setEstado("Sin facturas pendientes");
+                    clienteRepository.save(cliente);
+                }
+            }
+        }
+    }
+
+    // Metodo fallback
+    public void facturaServiceDown(){
+        System.out.println("ERROR: SERVICIO FACTURAS NO DISPONIBLE");
+    }
+
 }
