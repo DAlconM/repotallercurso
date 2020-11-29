@@ -3,6 +3,7 @@ package practicams.pagoservice.services;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -69,6 +70,7 @@ public class PagoService {
     // Resultado será una coleccion clave valor
     // Siendo clave un string con el id del cliente y nombre
     // Y la lista de sus pagos que obtenemos de las facturas de ese cliente
+    @HystrixCommand(fallbackMethod = "facturaServiceDown")
     public Map<String, List<Pago>> getPagosByClientId(Integer clientId){
         Map<String, List<Pago>> resultado = new HashMap<>();
 
@@ -106,6 +108,7 @@ public class PagoService {
     // Resultado será una coleccion clave valor
     // Siendo clave un string con la factura y su estado
     // Y la lista de sus pagos que obtenemos de las facturas de con ese estado
+    @HystrixCommand(fallbackMethod = "facturaServiceDown2")
     public Map<String, List<Pago>> getPagosByFacturaEstado(String estado){
         Map<String, List<Pago>> resultado = new HashMap<>();
 
@@ -142,6 +145,7 @@ public class PagoService {
     // Este método llama al ms de clientes para saber los clientes con ese estado
     // Cuando tiene los clientes va recorriendo clientes para sacar los pagos de cada uno
     // El resultado es un mapa con cliente, su estado y sus pagos
+    @HystrixCommand(fallbackMethod = "clienteServiceDown")
     public Map<String, Map<String, List<Pago>>> getPagosByClienteEstado(String estado) {
         Map<String, Map<String, List<Pago>>> resultado = new HashMap<>();
 
@@ -176,6 +180,37 @@ public class PagoService {
 
         return resultado;
     }
+
+    /*
+        Métodos FallBack que son ejecutados cuando salta el HystrixCommand
+    */
+
+    // Método fallback cuando el servicio de facturas está caído
+    public Map<String, List<Pago>> facturaServiceDown(Integer clientId){
+        Map<String, List<Pago>> resultado = new HashMap<>();
+
+        resultado.put("El servicio de facturas no está disponible", null);
+        return resultado;
+    }
+
+    // Método fallback cuando el servicio de facturas está caído
+    public Map<String, List<Pago>> facturaServiceDown2(String estado){
+        Map<String, List<Pago>> resultado = new HashMap<>();
+
+        resultado.put("El servicio de facturas no está disponible", null);
+        return resultado;
+    }
+
+    // Método fallback cuando el servicio de clientes está caído
+    // También se dispara cuando el servicio de facturas está caído
+    public Map<String, Map<String, List<Pago>>> clienteServiceDown(String estado){
+        Map<String, Map<String, List<Pago>>> resultado = new HashMap<>();
+
+        resultado.put("El servicio de clientes o facturas no está disponible", null);
+        return resultado;
+    }
+
+
 
 
 

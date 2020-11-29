@@ -1,0 +1,733 @@
+{
+	"info": {
+		"_postman_id": "5acd29dd-05ca-4b2a-b580-13fde336a97b",
+		"name": "Llamadas Práctica MS CON GATEWAY",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GATEWAY Obetener todas las rutas de los microservicios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/actuator/gateway/routes",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"gateway",
+						"routes"
+					]
+				},
+				"description": "http://192.168.1.58:8080/actuator/gateway/routes"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos los clientes de la base de datos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/cliente-service/clientes/all",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"cliente-service",
+						"clientes",
+						"all"
+					]
+				},
+				"description": "http://192.168.1.58:8080/cliente-service/clientes/all"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar las direcciones de un cliente por su ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/cliente-service/clientes/getDir/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"cliente-service",
+						"clientes",
+						"getDir",
+						"1"
+					]
+				},
+				"description": "http://192.168.1.58:8080/cliente-service/"
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos los clientes con nombre (muestra direcciones)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/cliente-service/clientes/bynombre/Daniel",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"cliente-service",
+						"clientes",
+						"bynombre",
+						"Daniel"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos los clientes por provincia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/cliente-service/clientes/byprovincia/Caceres",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"cliente-service",
+						"clientes",
+						"byprovincia",
+						"Caceres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todas las visitas de la base de datos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/visita-service/visitas/all",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"visita-service",
+						"visitas",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar una visita por su cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/visita-service/visitas/byclienteid/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"visita-service",
+						"visitas",
+						"byclienteid",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar visitas por su estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/visita-service/visitas/bystate?estado=Agendada",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"visita-service",
+						"visitas",
+						"bystate"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Agendada"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar visitas por cliente y estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8093/visitas/byclienteandestado/4?estado=Facturada",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8093",
+					"path": [
+						"visitas",
+						"byclienteandestado",
+						"4"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Facturada"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar una visita por su ID ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/visita-service/visitas/byid/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"visita-service",
+						"visitas",
+						"byid",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar una visita pasandole un JSON",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"estado\": \"Sin Facturar\",\r\n    \"cliente\": 1,\r\n    \"importe\": 70.0,\r\n    \"factura\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.58:8080/visita-service/visitas/modifyvisita",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"visita-service",
+						"visitas",
+						"modifyvisita"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todas las facturas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/all",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar una factura por JSON",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5fc276d821653a4b60324819\",\r\n    \"estado\": \"Pendiente pago\",\r\n    \"cliente\": 1,\r\n    \"importetotal\": 25.0,\r\n    \"formapago\": 0,\r\n    \"lineasfactura\": [\r\n        {\r\n            \"id\": 1,\r\n            \"cliente\": 1,\r\n            \"importe\": 25.0,\r\n            \"factura\": \"5fc276d821653a4b60324819\",\r\n            \"estado\": \"Facturada\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/modify",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"modify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertar una factura vacía por JSON",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"estado\": \"Pendiente pago\",\r\n    \"cliente\": null,\r\n    \"importetotal\": 0.0,\r\n    \"formapago\": 0,\r\n    \"lineasfactura\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/insertempty",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"insertempty"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar una factura por id de cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/byclienteid/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"byclienteid",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar una factura por su id de factura",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/byid/5fc276d821653a4b60324819",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"byid",
+						"5fc276d821653a4b60324819"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar facturas por estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/byestado?estado=Pendiente pago",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"byestado"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Pendiente pago"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar facturas por importe total",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/factura-service/facturas/byimporte?importe=25.0",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"factura-service",
+						"facturas",
+						"byimporte"
+					],
+					"query": [
+						{
+							"key": "importe",
+							"value": "25.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar todos los pagos ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/all",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar un pago por su id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/byid/5fc29c8fedd6547d8e22308d",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"byid",
+						"5fc29c8fedd6547d8e22308d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertar un pago vacío por JSON",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"factura\": null,\r\n    \"importepago\": 0.0,\r\n    \"estado\": \"Pendiente\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/insertempty",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"insertempty"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar un pago por JSON",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"5fc29ef3e75800089c91755e\",\r\n    \"factura\": \"5fc27fb5579cb2716ea7bce9\",\r\n    \"estado\": \"Pagado\",\r\n    \"importe\": 15.0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/modify",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"modify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar pagos por estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/byestado?estado=Pendiente",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"byestado"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Pendiente"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar los pagos por id de cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/byclientid/4",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"byclientid",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar pagos por estado factura",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/byfacturaestado?estado=Pagada parcialmente",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"byfacturaestado"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Pagada parcialmente"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar facturas por estado de cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.1.58:8080/pago-service/pagos/byclienteestado?estado=Factura pendiente pago",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"58"
+					],
+					"port": "8080",
+					"path": [
+						"pago-service",
+						"pagos",
+						"byclienteestado"
+					],
+					"query": [
+						{
+							"key": "estado",
+							"value": "Factura pendiente pago"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

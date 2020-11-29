@@ -35,7 +35,17 @@ public class VisitaService {
 
     // Devolver las visitas por cliente y estado
     public List<Visita> getAllVisitasByClienteAndEstado(Integer clienteId, String estado) {
-        return visitaRepository.findAllByClienteAndEstado(clienteId, estado);
+
+        List<Visita> visitas = visitaRepository.findAllByClienteAndEstado(clienteId, estado);
+
+        if(visitas.isEmpty()){
+            Visita v = new Visita();
+            v.setEstado("No hay visitas con ese estado para este cliente");
+            visitas.add(v);
+            return visitas;
+        }
+
+        return visitas;
     }
 
     // Modificar una visita
