@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import practicams.clienteservice.services.ClienteService;
 import practicams.clienteservice.services.DireccionService;
+import practicams.proyectoentidadesdto.domain.ClienteDTO;
 import practicams.proyectoentidadessql.domain.Cliente;
 import practicams.proyectoentidadessql.domain.Direccion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,8 +82,19 @@ public class ClienteController {
         Métodos práctica para llamadas entre microservicios
      */
 
+    //
+    // Método que devuelve los clientes por estado
+    //
+    @GetMapping("/callcliente/byclienteestado/{estado}")
+    public List<ClienteDTO> callGetClientesByEstado(@PathVariable("estado") String estado){
+        List<Cliente> clientes = clienteService.getClientesByEstado(estado);
 
+        // Mapeamos los clientes a dto para su transferencia
+        List<ClienteDTO> resultado = mapClienteToClienteDTO(clientes);
 
+        // Devolvemos los clientes dto
+        return resultado;
+    }
 
 
     /*
@@ -140,4 +153,21 @@ public class ClienteController {
     // Eliminar un cliente
 
 
+    // Método que mapea una lista de clientes a clientes dto
+    private List<ClienteDTO> mapClienteToClienteDTO(List<Cliente> clientes) {
+        List<ClienteDTO> resultado = new ArrayList<>();
+
+        for(Cliente c : clientes){
+            ClienteDTO cdto = new ClienteDTO();
+            cdto.setId(c.getId());
+            cdto.setNombre(c.getNombre());
+            cdto.setApellido(c.getApellido());
+            cdto.setEstado(c.getEstado());
+
+            resultado.add(cdto);
+        }
+
+        return resultado;
+
+    }
 }

@@ -9,13 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import practicams.pagoservice.repositories.PagoRepository;
+import practicams.proyectoentidadesdto.domain.ClienteDTO;
 import practicams.proyectoentidadesdto.domain.FacturaDTO;
 import practicams.proyectoentidadesmongo.domain.Pago;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PagoService {
@@ -97,7 +95,7 @@ public class PagoService {
 
         // Recorremos las facturas sacando los pagos de cada una y añadiendolo al mapa
         for(FacturaDTO f : facturas){
-            resultado.put("Cliente ID: " + clientId, pagoRepository.findAllByFactura(f.getId()));
+            resultado.put("Pagos cliente ID: " + clientId, pagoRepository.findAllByFactura(f.getId()));
         }
 
         return resultado;
@@ -136,6 +134,45 @@ public class PagoService {
         for(FacturaDTO f : facturas){
             resultado.put("Factura ID: " + f.getId() + "Estado: " + f.getEstado(), pagoRepository.findAllByFactura(f.getId()));
         }
+
+        return resultado;
+    }
+
+    // Devolver los pagos de los clientes por estado
+    // Este método llama al ms de clientes para saber los clientes con ese estado
+    // Cuando tiene los clientes va recorriendo clientes para sacar los pagos de cada uno
+    // El resultado es un mapa con cliente, su estado y sus pagos
+    public Map<String, Map<String, List<Pago>>> getPagosByClienteEstado(String estado) {
+        Map<String, Map<String, List<Pago>>> resultado = new HashMap<>();
+
+        // Primero obtenemos los clientes con ese estado
+        ///////////////////////////////////////////
+        // Llamada usando RestTemplate
+        // Implementar LoadBalancer
+        ///////////////////////////////////////////
+        Application app = eurekaClient.getApplication("CLIENTE-SERVICE");
+        List<InstanceInfo> infoApp = app.getInstances();
+        String url = infoApp.get(0).getHomePageUrl();
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<ClienteDTO[]> response = restTemplate.getForEntity(url + "/callcliente/byclienteestado/" + estado, ClienteDTO[].class);
+
+        ClienteDTO[] clientes = response.getBody();
+
+        // Si no hay clientes no hacemos mas
+        if (clientes == null || clientes.length == 0) {
+            resultado.put("No hay clientes con ese estado", null);
+            return resultado;
+        }
+
+        // Ahora que tenemos los clientes, debemos sacar las facturas de cada uno y los pagos de estas
+        // Para ello recorremos la lista de clientes sacando sus facturas y pagos
+        for (ClienteDTO c : clientes) {
+            Map<String, List<Pago>> pagosCliente = getPagosByClientId(c.getId());
+            resultado.put("Cliente: " + c.getNombre() + " " + c.getApellido() + " || Estado: " + c.getEstado(), pagosCliente);
+        }
+
+        // Aquí resultado es un mapa de clave String y de valor otro mapa de string lista pagos
 
         return resultado;
     }

@@ -68,7 +68,7 @@ public class PagoController {
 
 
     // Mostrar pagos por estado de factura
-    @GetMapping("/pagos/byfacturaestado/")
+    @GetMapping("/pagos/byfacturaestado")
     public Map<String, List<Pago>> getPagosByFacturaEstado(@RequestParam String estado){
         Map<String, List<Pago>> resultado = new HashMap<>();
         // Comprobamos la validez del estado
@@ -86,8 +86,18 @@ public class PagoController {
 
     // Mostrar pagos por estado de cliente
     @GetMapping("/pagos/byclienteestado")
-    public Map<String, List<Pago>> getPagosByClienteEstado(@RequestParam String estado){
-        return null;
+    public Map<String, Map<String, List<Pago>>> getPagosByClienteEstado(@RequestParam String estado){
+        Map<String, Map<String, List<Pago>>> resultado = new HashMap<>();
+        // Comprobamos la validez del estado
+        // Con facturas pendientes, Sin facturas pendientes
+        if(!estado.equals("Sin facturas pendientes") && !estado.equals("Factura pendiente pago") && !estado.equals("Impagado")){
+            resultado.put("Estado de cliente inválido", null);
+            return resultado;
+        }
+
+        resultado = pagoService.getPagosByClienteEstado(estado);
+
+        return resultado;
     }
 
     /*

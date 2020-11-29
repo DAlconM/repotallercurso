@@ -13,4 +13,6 @@ public interface ClienteRepository extends Repository<Cliente, Integer> {
 
     List<Cliente> findAllByNombre(String nombre);
 
+    List<Cliente> findAllByEstado(String estado);
+
 }

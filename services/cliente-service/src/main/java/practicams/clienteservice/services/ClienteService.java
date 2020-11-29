@@ -50,4 +50,9 @@ public class ClienteService {
         return clientes;
 
     }
+
+    // Devolver los clientes por el estado
+    public List<Cliente> getClientesByEstado(String estado){
+        return clienteRepository.findAllByEstado(estado);
+    }
 }
