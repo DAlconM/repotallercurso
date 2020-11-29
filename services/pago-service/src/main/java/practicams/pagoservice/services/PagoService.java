@@ -22,6 +22,9 @@ public class PagoService {
     @Autowired
     PagoRepository pagoRepository;
 
+    @Autowired
+    RestTemplate cloudControl;
+
     // Bean de Eureka
     @Qualifier("eurekaClient")
     @Autowired
@@ -74,18 +77,16 @@ public class PagoService {
     public Map<String, List<Pago>> getPagosByClientId(Integer clientId){
         Map<String, List<Pago>> resultado = new HashMap<>();
 
+
+        //Application app = eurekaClient.getApplication("FACTURA-SERVICE");
+        //List<InstanceInfo> infoApp = app.getInstances();
+        //String url = infoApp.get(0).getHomePageUrl();
+        //RestTemplate restTemplate = new RestTemplate();
+        //ResponseEntity<FacturaDTO[]> response = restTemplate.getForEntity(url + "/callfactura/byclientid/" + clientId, FacturaDTO[].class);
+
         // Primero sacamos las facturas con ese id de cliente llamando al servicio de facturas
-
-        ///////////////////////////////////////////
-        // Llamada usando RestTemplate
-        // Implementar LoadBalancer
-        ///////////////////////////////////////////
-        Application app = eurekaClient.getApplication("FACTURA-SERVICE");
-        List<InstanceInfo> infoApp = app.getInstances();
-        String url = infoApp.get(0).getHomePageUrl();
-
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<FacturaDTO[]> response = restTemplate.getForEntity(url + "/callfactura/byclientid/" + clientId, FacturaDTO[].class);
+        // Llamada con Balancer
+        ResponseEntity<FacturaDTO[]> response = cloudControl.getForEntity("http://factura-service/callfactura/byclientid/" + clientId, FacturaDTO[].class);
 
         FacturaDTO[] facturas = response.getBody();
 
@@ -112,18 +113,18 @@ public class PagoService {
     public Map<String, List<Pago>> getPagosByFacturaEstado(String estado){
         Map<String, List<Pago>> resultado = new HashMap<>();
 
-        // Primero sacamos las facturas con ese estado llamando al servicio de facturas
-
-        ///////////////////////////////////////////
-        // Llamada usando RestTemplate
-        // Implementar LoadBalancer
-        ///////////////////////////////////////////
+        /*
         Application app = eurekaClient.getApplication("FACTURA-SERVICE");
         List<InstanceInfo> infoApp = app.getInstances();
         String url = infoApp.get(0).getHomePageUrl();
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<FacturaDTO[]> response = restTemplate.getForEntity(url + "/callfactura/byfacturaestado/" + estado, FacturaDTO[].class);
+        */
+
+        // Primero sacamos las facturas con ese estado llamando al servicio de facturas
+        // Llamada con Balancer
+        ResponseEntity<FacturaDTO[]> response = cloudControl.getForEntity("http://factura-service/callfactura/byfacturaestado/" + estado, FacturaDTO[].class);
 
         FacturaDTO[] facturas = response.getBody();
 
@@ -149,17 +150,18 @@ public class PagoService {
     public Map<String, Map<String, List<Pago>>> getPagosByClienteEstado(String estado) {
         Map<String, Map<String, List<Pago>>> resultado = new HashMap<>();
 
-        // Primero obtenemos los clientes con ese estado
-        ///////////////////////////////////////////
-        // Llamada usando RestTemplate
-        // Implementar LoadBalancer
-        ///////////////////////////////////////////
+        /*
         Application app = eurekaClient.getApplication("CLIENTE-SERVICE");
         List<InstanceInfo> infoApp = app.getInstances();
         String url = infoApp.get(0).getHomePageUrl();
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<ClienteDTO[]> response = restTemplate.getForEntity(url + "/callcliente/byclienteestado/" + estado, ClienteDTO[].class);
+        */
+
+        // Primero obtenemos los clientes con ese estado
+        // Llamada con Balancer
+        ResponseEntity<ClienteDTO[]> response = cloudControl.getForEntity("http://cliente-service/callcliente/byclienteestado/" + estado, ClienteDTO[].class);
 
         ClienteDTO[] clientes = response.getBody();
 

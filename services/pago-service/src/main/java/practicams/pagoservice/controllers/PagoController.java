@@ -2,7 +2,10 @@ package practicams.pagoservice.controllers;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import practicams.pagoservice.services.PagoService;
 import practicams.proyectoentidadesmongo.domain.Factura;
 import practicams.proyectoentidadesmongo.domain.Pago;
@@ -17,6 +20,13 @@ public class PagoController {
 
     @Autowired
     PagoService pagoService;
+
+    // Balanceador de carga para las llamadas entre microservicios
+    @LoadBalanced
+    @Bean
+    RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
 
     /*
         Métodos práctica en microservicio
