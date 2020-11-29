@@ -699,7 +699,7 @@
 			"response": []
 		},
 		{
-			"name": "Mostrar facturas por estado de cliente",
+			"name": "Mostrar pagos por estado de cliente",
 			"request": {
 				"method": "GET",
 				"header": [],
