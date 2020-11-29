@@ -1,5 +1,6 @@
 package practicams.pagoservice.controllers;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import practicams.pagoservice.services.PagoService;
@@ -21,6 +22,7 @@ public class PagoController {
         Métodos práctica en microservicio
      */
     // Mostrar pagos por el id de la factura
+    @HystrixCommand
     @GetMapping("/pagos/bypagoid/{id}")
     public List<Pago> getPagosById(@PathVariable("id") String pagoid){
         List<Pago> resultado = pagoService.getPagosByFactura(pagoid);
@@ -36,6 +38,7 @@ public class PagoController {
     }
 
     // Mostrar pagos por el estado del pago
+    @HystrixCommand
     @GetMapping("/pagos/byestado")
     public List<Pago> getPagosByEstado(@RequestParam String estado){
         List<Pago> resultado = new ArrayList<>();
@@ -61,6 +64,7 @@ public class PagoController {
 
 
     // Mostrar pagos por cliente
+    @HystrixCommand
     @GetMapping("/pagos/byclientid/{id}")
     public Map<String, List<Pago>> getPagosByClientId(@PathVariable("id") Integer clienteId){
         return pagoService.getPagosByClientId(clienteId);
@@ -68,6 +72,7 @@ public class PagoController {
 
 
     // Mostrar pagos por estado de factura
+    @HystrixCommand
     @GetMapping("/pagos/byfacturaestado")
     public Map<String, List<Pago>> getPagosByFacturaEstado(@RequestParam String estado){
         Map<String, List<Pago>> resultado = new HashMap<>();
@@ -85,6 +90,7 @@ public class PagoController {
     }
 
     // Mostrar pagos por estado de cliente
+    @HystrixCommand
     @GetMapping("/pagos/byclienteestado")
     public Map<String, Map<String, List<Pago>>> getPagosByClienteEstado(@RequestParam String estado){
         Map<String, Map<String, List<Pago>>> resultado = new HashMap<>();
@@ -111,24 +117,28 @@ public class PagoController {
      */
 
     // Mostrar todos los pagos
+    @HystrixCommand
     @GetMapping("/pagos/all")
     public List<Pago> getAllPagos(){
         return pagoService.getAllPagos();
     }
 
     // Mostrar un pago por id
+    @HystrixCommand
     @GetMapping("/pagos/byid/{id}")
     public Pago getPagoById(@PathVariable("id") String id){
         return pagoService.getPagoById(id);
     }
 
     // Modificar uno pago por JSON
+    @HystrixCommand
     @PutMapping("/pagos/modify")
     public Pago modifyPago(@RequestBody Pago pago){
         return pagoService.modifyPago(pago);
     }
 
     // Insertar un pago vací por JSON
+    @HystrixCommand
     @PostMapping("/pagos/insertempty")
     public Pago insertEmptyPago(@RequestBody Pago pago){
         return pagoService.insertEmptyPago(pago);

@@ -1,6 +1,7 @@
 package practicams.facturaservice.controllers;
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class FacturaController {
     //
     // Obtener una factura por el id de cliente
     //
+    @HystrixCommand
     @GetMapping("/facturas/byclienteid/{id}")
     public List<Factura> getFacturasByClienteId(@PathVariable("id") Integer clienteId){
         List<Factura> resultado = facturaService.getFacturasByClienteId(clienteId);
@@ -44,6 +46,7 @@ public class FacturaController {
     //
     // Obtener facturas por el estado
     //
+    @HystrixCommand
     @GetMapping("/facturas/byestado")
     public List<Factura> getFacturasByEstado(@RequestParam String estado){
         List<Factura> resultado = new ArrayList<>();
@@ -74,6 +77,7 @@ public class FacturaController {
     //
     // Sacar facturas por importe
     //
+    @HystrixCommand
     @GetMapping("/facturas/byimporte")
     public List<Factura> getFacturasByImportetotal(@RequestParam double importe){
         // Sacamos las facturas por el importe
@@ -97,6 +101,7 @@ public class FacturaController {
     //
     // Método remoto que devuelve las facturas por id de cliente
     //
+    @HystrixCommand
     @GetMapping("/callfactura/byclientid/{id}")
     public List<FacturaDTO> callGetFacturasByCliente(@PathVariable("id") Integer clienteid){
         List<Factura> facturas =  facturaService.getFacturasByClienteId(clienteid);
@@ -112,6 +117,7 @@ public class FacturaController {
     //
     // Método remoto que devuelve las facturas por estado de la factura
     //
+    @HystrixCommand
     @GetMapping("/callfactura/byfacturaestado/{estado}")
     public List<FacturaDTO> callGetFacturasByEstado(@PathVariable("estado") String estado){
         List<Factura> facturas =  facturaService.getFacturasByEstado(estado);
@@ -130,24 +136,28 @@ public class FacturaController {
      */
 
     // Mostrar todas las facturas
+    @HystrixCommand
     @GetMapping("/facturas/all")
     public List<Factura> getAllFacturas(){
         return facturaService.getAllFacturas();
     }
 
     // Mostrar una factura por id de factura
+    @HystrixCommand
     @GetMapping("/facturas/byid/{id}")
     public Factura getFacturaById(@PathVariable("id") String id){
         return facturaService.getFacturaById(id);
     }
 
     // Modificar una factura por JSON
+    @HystrixCommand
     @PutMapping("/facturas/modify")
     public Factura modifyFactura(@RequestBody Factura factura){
         return facturaService.modifyFactura(factura);
     }
 
     // Insertar una factura vacía por JSON
+    @HystrixCommand
     @PostMapping("/facturas/insertempty")
     public Factura insertEmptyFactura(@RequestBody Factura factura){
         return facturaService.insertEmptyFactura(factura);

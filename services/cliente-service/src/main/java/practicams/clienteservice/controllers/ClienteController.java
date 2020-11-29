@@ -1,5 +1,6 @@
 package practicams.clienteservice.controllers;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,7 @@ public class ClienteController {
     //
     // Mostrar clientes por nombre
     //
+    @HystrixCommand
     @GetMapping("/clientes/bynombre/{nombre}")
     public Map<String, List<Direccion>> getClientesByNombre(@PathVariable("nombre") String nombre){
         Map<String, List<Direccion>> resultado = new HashMap<>();
@@ -58,6 +60,7 @@ public class ClienteController {
     //
     // Mostrar clientes por provincia
     //
+    @HystrixCommand
     @GetMapping("/clientes/byprovincia/{provincia}")
     public Map<String, List<Direccion>> getClientesByProvincia(@PathVariable("provincia") String provincia){
         Map<String, List<Direccion>> resultado = new HashMap<>();
@@ -85,6 +88,7 @@ public class ClienteController {
     //
     // Método que devuelve los clientes por estado
     //
+    @HystrixCommand
     @GetMapping("/callcliente/byclienteestado/{estado}")
     public List<ClienteDTO> callGetClientesByEstado(@PathVariable("estado") String estado){
         List<Cliente> clientes = clienteService.getClientesByEstado(estado);
@@ -102,12 +106,14 @@ public class ClienteController {
      */
 
     // Obtener todos los clientes de la base de datos
+    @HystrixCommand
     @GetMapping("/clientes/all")
     public List<Cliente> getAllClientes(){
         return clienteService.getAllClientes();
     }
 
     // Obtener todos los clientes de la base de datos con sus direcciones
+    @HystrixCommand
     @GetMapping("/clientes/allanddir")
     public Map<String, List<Direccion>> getAllClienteAndDireccion(){
         Map<String, List<Direccion>> resultado = new HashMap<>();
@@ -127,6 +133,7 @@ public class ClienteController {
     }
 
     // Sacar el Cliente y sus direcciones por id
+    @HystrixCommand
     @GetMapping("/clientes/getDir/{id}")
     public Map<String, List<Direccion>> getClienteDirId(@PathVariable("id") Integer id){
         Map<String, List<Direccion>> resultado = new HashMap<>();

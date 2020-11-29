@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: cliente-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      label: main
