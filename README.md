@@ -1,6 +1,9 @@
 # repotallercurso
 Taller del curso Everis Java + MS
 
+Autor: Daniel Alcón Martín
+Fecha: 30/11/2020
+
 Repositorio con los microservicios y la estrutura de servicios auxiliares.
 
 Puertos de conexión servicios auxiliares
