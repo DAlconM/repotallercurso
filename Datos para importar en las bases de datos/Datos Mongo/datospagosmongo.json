@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "5fc29c8fedd6547d8e22308d"
+  },
+  "factura": "5fc276d821653a4b60324819",
+  "importepago": 25,
+  "estado": "Pendiente pago",
+  "_class": "practicams.proyectoentidadesmongo.domain.Pago"
+},{
+  "_id": {
+    "$oid": "5fc29db8e75800089c91755d"
+  },
+  "factura": "5fc27fb5579cb2716ea7bce9",
+  "importepago": 15,
+  "estado": "Pendiente",
+  "_class": "practicams.proyectoentidadesmongo.domain.Pago"
+},{
+  "_id": {
+    "$oid": "5fc29ef3e75800089c91755e"
+  },
+  "factura": "5fc27fb5579cb2716ea7bce9",
+  "importepago": 15,
+  "estado": "Pagado",
+  "_class": "practicams.proyectoentidadesmongo.domain.Pago"
+},{
+  "_id": {
+    "$oid": "5fc3913a7196ce3e74e62998"
+  },
+  "factura": "5fc390da7196ce3e74e62997",
+  "importepago": 10,
+  "estado": "Pagado",
+  "_class": "practicams.proyectoentidadesmongo.domain.Pago"
+},{
+  "_id": {
+    "$oid": "5fc391457196ce3e74e62999"
+  },
+  "factura": "5fc390da7196ce3e74e62997",
+  "importepago": 10,
+  "estado": "Pagado",
+  "_class": "practicams.proyectoentidadesmongo.domain.Pago"
+},{
+  "_id": {
+    "$oid": "5fc3914b7196ce3e74e6299a"
+  },
+  "factura": "5fc390da7196ce3e74e62997",
+  "importepago": 10,
+  "estado": "Pagado",
+  "_class": "practicams.proyectoentidadesmongo.domain.Pago"
+}]

@@ -1,0 +1,62 @@
+[{
+  "_id": {
+    "$oid": "5fc276d821653a4b60324819"
+  },
+  "estado": "Pendiente pago",
+  "cliente": 1,
+  "importetotal": 25,
+  "formapago": 1,
+  "lineasfactura": [
+    {
+      "_id": 1,
+      "cliente": 1,
+      "importe": 25,
+      "factura": "5fc276d821653a4b60324819",
+      "estado": "Facturada"
+    }
+  ],
+  "_class": "practicams.proyectoentidadesmongo.domain.Factura"
+},{
+  "_id": {
+    "$oid": "5fc27fb5579cb2716ea7bce9"
+  },
+  "estado": "Pagada parcialmente",
+  "cliente": 2,
+  "importetotal": 30,
+  "formapago": 2,
+  "lineasfactura": [
+    {
+      "_id": 2,
+      "cliente": 2,
+      "importe": 30,
+      "factura": "5fc27fb5579cb2716ea7bce9",
+      "estado": "Facturada"
+    }
+  ],
+  "_class": "practicams.proyectoentidadesmongo.domain.Factura"
+},{
+  "_id": {
+    "$oid": "5fc390da7196ce3e74e62997"
+  },
+  "estado": "Pagada",
+  "cliente": 4,
+  "importetotal": 30,
+  "formapago": 3,
+  "lineasfactura": [
+    {
+      "_id": 5,
+      "cliente": 1,
+      "importe": 15,
+      "factura": "5fc390da7196ce3e74e62997",
+      "estado": "Facturada"
+    },
+    {
+      "_id": 6,
+      "cliente": 1,
+      "importe": 15,
+      "factura": "5fc390da7196ce3e74e62997",
+      "estado": "Facturada"
+    }
+  ],
+  "_class": "practicams.proyectoentidadesmongo.domain.Factura"
+}]
