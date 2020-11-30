@@ -23,3 +23,9 @@ Proyectos de entidades del dominio
 - proyecto-entidades-dto (Data Transfer Object)
 - proyecto-entidades-mongo
 - proyecto-entidades-sql
+
+En la carpeta "Llamadas Postman" se encuentran dos archivos de Postman con las llamadas a los microservicios exportadas. Las que utilizan Gateway en el puerto 8080 y el nombre del ms, requieren que esté inciado el programa cloud-server.
+
+Todos los Microservicios utilizan server-config para buscar su fichero properties en el repositorio de github (https://github.com/DAlconM/repotallercursoconfig.git). 
+
+En la carpeta "Archivos de properties" se encuentran los properties de las aplicaciones del github, pero no se utilizan para nada.
