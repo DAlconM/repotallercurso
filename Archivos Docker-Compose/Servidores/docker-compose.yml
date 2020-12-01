@@ -1,0 +1,56 @@
+version: "2"
+services:
+  eurekaserver:
+    image: eureka-image
+    container_name: eureka-container-2
+    ports:
+      - "8761:8761"
+
+  configserver:
+    image: configserver-image
+    container_name: config-container-2
+    ports:
+      - "8888:8888"
+
+  mysql:
+    image: mysql
+    container_name: mysql-container-2
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=Myzisql1
+    volumes:
+      - C:\data-volume-sql:/var/lib/mysql
+  
+  mongo:
+    image: mongo
+    container_name: mongo-contaier-2
+    ports:
+      - "27017:27017"
+    volumes:
+      - C:\data-volume-mongo:/data/db
+    
+  cloud:
+    image: cloudserver-image
+    container_name: cloudserver-container-2
+    ports: 
+      - "8080:8080"
+
+  admin:
+    image: adminserver-image
+    container_name: adminserver-container-2
+    ports:
+      - "8081:8081"
+
+  hystrix:
+    image: hystrixserver-image
+    container_name: hystrixserver-container-2
+    ports:
+      - "8082:8082"
+
+  turbine:
+    image: turbineserver-image
+    container_name: turbineserver-container-2
+    ports:
+      - "8083:8083"
+  

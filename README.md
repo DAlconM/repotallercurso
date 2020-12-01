@@ -50,3 +50,7 @@ Tanto Hystrix-server como Turbine-server tienen configuradas las ip de 172.24.22
 hystrix.dashboard.proxyStreamAllowList=172.24.224.1
 
 Las bases de datos tienen los datos que se encuentran en el archivo "Datos para importar en las bases de datos".
+
+En la carpeta "Archivos Docker-Compose" se encuentran los ficheros .yml para hacer el docker-compose de los containers. Levantarlos todos a la vez puede dar errores de conexión en los microservicios porque no podemos controlar el orden en que se activan. 
+La solución pasa por crear dos subcarpetas: "servidores" y "servicios". De esta forma, si hacemos el docker-compose primero de los servidores, nos creará un cluster de containers con los servicios. Cuando estén arrancados, haremos el docker-compose de los servicios los cuales ya tendrán disponibles el resto de servidores.
+- Anotación: los servicios cliente y visita pueden dar fallos sobre la conexión con mysql por el SSL. En sus urls tienen indicado SSL=false, pero aún así se debe acceder antes almenos una vez a la configuración de la conexión de la base de datos con mysql workbench para indicar que no utilice SSL.
