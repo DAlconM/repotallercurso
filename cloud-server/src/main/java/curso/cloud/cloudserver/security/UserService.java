@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
@@ -50,4 +51,13 @@ public class UserService {
             return saved.block();
         }
     }
+
+    public List<User> getAllUsers(){
+        Flux<User> fromDB = userRepository.findAll();
+
+        Mono<List<User>> monousers = fromDB.collectList();
+
+        return monousers.block();
+    }
+
 }

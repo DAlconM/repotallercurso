@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
 @EnableWebFluxSecurity
@@ -29,6 +27,7 @@ public class WebfluxSecurityConfig {
         // Permitimos la creación del usuario y el actuator solo a los administradores
         authorizeExchangeSpec.pathMatchers("/createuser/**").hasRole("ADMIN");
         authorizeExchangeSpec.pathMatchers("/actuator/**").hasRole("ADMIN");
+        authorizeExchangeSpec.pathMatchers("/allusers/**").hasRole("ADMIN");
 
         // Con esto permitimos a cualquier autenticado el acceso
         //authorizeExchangeSpec.pathMatchers("/**").authenticated();
@@ -40,7 +39,6 @@ public class WebfluxSecurityConfig {
         authorizeExchangeSpec.pathMatchers("/cliente-service/**").hasAnyRole("ADMIN", "CLIENTE");
         authorizeExchangeSpec.pathMatchers("/visita-service/**").hasAnyRole("ADMIN", "VISITA");
         authorizeExchangeSpec.pathMatchers("/factura-service/**").hasAnyRole("ADMIN", "FACTURA");
-        //authorizeExchangeSpec.pathMatchers("/pago-service/**").hasRole("PAGO");
         authorizeExchangeSpec.pathMatchers("/pago-service/**").hasAnyRole("ADMIN", "PAGO");
 
         authorizeExchangeSpec.and().csrf().disable().httpBasic().and().formLogin().loginPage("/login");
