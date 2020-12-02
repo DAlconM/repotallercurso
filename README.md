@@ -66,3 +66,6 @@ La solución pasa por crear dos subcarpetas: "servidores" y "servicios". De esta
  -  pago-service <pago,pago> ROLE_PAGO
  -  actuator <admin,admin> ROLE_ADMIN
 
+
+El programa Gateway (cloud-server) tiene implementado un certificado SSL propio para poder hacerle peticiones https://. Para llamar desde Postman hay que dehabilitar la SLL validation.
+
